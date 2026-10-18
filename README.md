@@ -54,7 +54,7 @@ The branch replaces `tauri-runtime-wry` with `tauri-runtime-cef`. The first buil
 
 ## CI and releases
 
-CI runs lint, typecheck, tests, the frontend build and `cargo check` on Ubuntu. Pushing a `v*` tag builds installers for Linux, macOS and Windows and creates a draft GitHub release.
+CI runs lint, typecheck, tests, the frontend build and `cargo check` on Ubuntu. Pushing a `v*` tag builds installers for Linux, macOS and Windows and creates a draft GitHub release. Bump the version in `package.json`, `src-tauri/tauri.conf.json` and `src-tauri/Cargo.toml` first; the tag must match it.
 
 ## License
 
