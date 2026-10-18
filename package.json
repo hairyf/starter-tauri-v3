@@ -30,7 +30,6 @@
   "devDependencies": {
     "@antfu/eslint-config": "^9.5.1",
     "@tauri-apps/cli": "3.0.0-alpha.5",
-    "@types/node": "^26.6.5",
     "eslint": "^10.13.0",
     "typescript": "^6.0.3",
     "vite": "^8.3.4",
