@@ -50,7 +50,7 @@ pnpm install
 pnpm tauri dev
 ```
 
-The branch replaces `tauri-runtime-wry` with `tauri-runtime-cef`. The first build downloads about 1 GB of Chromium, and installers grow by roughly 170 MB. It is still the same Tauri app; only the webview runtime changes.
+The branch replaces `tauri-runtime-wry` with `tauri-runtime-cef`. The first build downloads about 1 GB of Chromium, and installers grow by roughly 170 MB. It is still the same Tauri app; only the webview runtime changes. Windows installer bundling on that branch is currently blocked upstream; the branch README has the details.
 
 ## CI and releases
 
