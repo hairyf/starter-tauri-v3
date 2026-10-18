@@ -1,0 +1,61 @@
+:root {
+  color: #e7e5e4;
+  background: #0c0a09;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  display: grid;
+  min-height: 100vh;
+  margin: 0;
+  place-items: center;
+}
+
+main {
+  display: grid;
+  width: min(24rem, calc(100vw - 4rem));
+  gap: 1rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+p {
+  margin: 0;
+  color: #a8a29e;
+}
+
+form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+input,
+button {
+  padding: 0.5rem 0.75rem;
+  color: inherit;
+  font: inherit;
+  background: #1c1917;
+  border: 1px solid #292524;
+  border-radius: 0.375rem;
+}
+
+input {
+  flex: 1;
+  min-width: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: #44403c;
+}
+
+output {
+  min-height: 1.5rem;
+  color: #1fa669;
+}

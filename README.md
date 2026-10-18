@@ -1,42 +1,61 @@
-# pkg-placeholder
+# starter-tauri-v3
 
-[![npm version][npm-version-src]][npm-version-href]
-[![npm downloads][npm-downloads-src]][npm-downloads-href]
-[![bundle][bundle-src]][bundle-href]
-[![JSDocs][jsdocs-src]][jsdocs-href]
-[![License][license-src]][license-href]
+[![CI](https://github.com/hairyf/starter-tauri-v3/actions/workflows/ci.yml/badge.svg)](https://github.com/hairyf/starter-tauri-v3/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/hairyf/starter-tauri-v3?style=flat&colorA=080f12&colorB=1fa669)](./LICENSE)
 
-_description_
+> [!WARNING]
+> Experimental. Tauri v3 is still alpha (`3.0.0-alpha.5`); its API, configuration and the CEF runtime can change between releases. Pin the versions and test before using it for anything serious.
 
-## Note for Developers
+Minimal Tauri v3 starter: a vanilla TypeScript + Vite frontend, a Rust backend, one `greet` command and a `cef` branch that swaps the system webview for Chromium.
 
-This starter recommands using [npm Trusted Publisher](https://github.com/e18e/ecosystem-issues/issues/201), where the release is done on CI to ensure the security of the packages.
+## Requirements
 
-To do so, you need to run `pnpm publish` manually for the very first time to create the package on npm, and then go to `https://www.npmjs.com/package/<your-package-name>/access` to set the connection to your GitHub repo.
+- Node.js 22+
+- pnpm 10+
+- Rust 1.95+
+- [Tauri prerequisites](https://v2.tauri.app/start/prerequisites/) for your platform
 
-Then for the future releases, you can run `pnpm run release` to do the release and the GitHub Actions will take care of the release process.
+## Quick start
 
-## Sponsors
+```bash
+pnpm install
+pnpm tauri dev
+```
 
-<p align="center">
-  <a href="https://cdn.jsdelivr.net/gh/antfu/static/sponsors.svg">
-    <img src="https://cdn.jsdelivr.net/gh/antfu/static/sponsors.svg" alt="Sponsors"/>
-  </a>
-</p>
+Build installers:
+
+```bash
+pnpm tauri build
+```
+
+## Scripts
+
+| Script | Description |
+| --- | --- |
+| `pnpm dev` | Start the Vite dev server |
+| `pnpm tauri dev` | Run the desktop app |
+| `pnpm build` | Build the frontend |
+| `pnpm tauri build` | Build the desktop app and installers |
+| `pnpm lint` | Run ESLint |
+| `pnpm typecheck` | Type-check the frontend |
+| `pnpm test` | Run Vitest |
+| `pnpm check:rust` | Run `cargo check` |
+| `pnpm check` | Run lint, typecheck, test and build |
+
+## CEF branch
+
+```bash
+git switch cef
+pnpm install
+pnpm tauri dev
+```
+
+The branch replaces `tauri-runtime-wry` with `tauri-runtime-cef`. The first build downloads about 1 GB of Chromium, and installers grow by roughly 170 MB. It is still the same Tauri app; only the webview runtime changes.
+
+## CI and releases
+
+CI runs lint, typecheck, tests, the frontend build and `cargo check` on Ubuntu. Pushing a `v*` tag builds installers for Linux, macOS and Windows and creates a draft GitHub release.
 
 ## License
 
-[MIT](./LICENSE) License © [Anthony Fu](https://github.com/antfu)
-
-<!-- Badges -->
-
-[npm-version-src]: https://img.shields.io/npm/v/pkg-placeholder?style=flat&colorA=080f12&colorB=1fa669
-[npm-version-href]: https://npmx.dev/package/pkg-placeholder
-[npm-downloads-src]: https://img.shields.io/npm/dm/pkg-placeholder?style=flat&colorA=080f12&colorB=1fa669
-[npm-downloads-href]: https://npmx.dev/package/pkg-placeholder
-[bundle-src]: https://img.shields.io/bundlephobia/minzip/pkg-placeholder?style=flat&colorA=080f12&colorB=1fa669&label=minzip
-[bundle-href]: https://bundlephobia.com/result?p=pkg-placeholder
-[license-src]: https://img.shields.io/github/license/antfu/pkg-placeholder.svg?style=flat&colorA=080f12&colorB=1fa669
-[license-href]: https://github.com/antfu/pkg-placeholder/blob/main/LICENSE
-[jsdocs-src]: https://img.shields.io/badge/jsdocs-reference-080f12?style=flat&colorA=080f12&colorB=1fa669
-[jsdocs-href]: https://www.jsdocs.io/package/pkg-placeholder
+[MIT](./LICENSE) © [hairyf](https://github.com/hairyf)
