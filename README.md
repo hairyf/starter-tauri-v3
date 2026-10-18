@@ -4,15 +4,16 @@
 [![License](https://img.shields.io/github/license/hairyf/starter-tauri-v3?style=flat&colorA=080f12&colorB=1fa669)](./LICENSE)
 
 > [!WARNING]
-> Experimental. Tauri v3 is still alpha (`3.0.0-alpha.5`); its API, configuration and the CEF runtime can change between releases. Pin the versions and test before using it for anything serious.
+> Experimental. Tauri v3 is still alpha (`3.0.0-alpha.5`) and this is the `cef` branch, which also depends on `tauri-runtime-cef 3.0.0-alpha.6`. APIs, configuration and the CEF runtime can change between releases. Pin the versions and test before using it for anything serious.
 
-Minimal Tauri v3 starter: a vanilla TypeScript + Vite frontend, a Rust backend, one `greet` command and a `cef` branch that swaps the system webview for Chromium.
+Minimal Tauri v3 starter on the Chromium Embedded Framework: a vanilla TypeScript + Vite frontend, a Rust backend and one `greet` command. The `main` branch uses the system webview through `tauri-runtime-wry`; this branch swaps in Chromium.
 
 ## Requirements
 
 - Node.js 22+
 - pnpm 10+
 - Rust 1.95+
+- CMake and Ninja (for the CEF build)
 - [Tauri prerequisites](https://v2.tauri.app/start/prerequisites/) for your platform
 
 ## Quick start
@@ -42,19 +43,26 @@ pnpm tauri build
 | `pnpm check:rust` | Run `cargo check` |
 | `pnpm check` | Run lint, typecheck, test and build |
 
-## CEF branch
+## CEF runtime
+
+This branch builds and runs on CEF by default:
 
 ```bash
-git switch cef
 pnpm install
 pnpm tauri dev
 ```
 
-The branch replaces `tauri-runtime-wry` with `tauri-runtime-cef`. The first build downloads about 1 GB of Chromium, and installers grow by roughly 170 MB. It is still the same Tauri app; only the webview runtime changes. Windows installer bundling on that branch is currently blocked upstream; the branch README has the details. GitHub's template button only copies `main`; clone the repository if you want the branch.
+The first build downloads about 1 GB of Chromium into the user cache (`~/.cache/tauri-cef` on Linux, `~/Library/Caches/tauri-cef` on macOS, `%LOCALAPPDATA%\tauri-cef` on Windows), or into `CEF_PATH` when set. Installers grow by roughly 170 MB. Chromium needs GTK 4 on Linux; the CI workflow installs the matching packages.
+
+To build against the system webview instead, use `--no-default-features --features wry`.
+
+### Known limitation
+
+Windows installer bundling is blocked in the current alpha: the minimal CEF distribution that `cef-rs` downloads omits `libEGL.dll` and `libGLESv2.dll`, while the Tauri bundler expects them. `pnpm tauri dev` and `pnpm tauri build --no-bundle` work; the release workflow therefore only builds Linux and macOS for now. Copy those two DLLs from a full CEF distribution into the cache directory if you need a Windows installer today.
 
 ## CI and releases
 
-CI runs lint, typecheck, tests, the frontend build and `cargo check` on Ubuntu. Pushing a `v*` tag builds installers for Linux, macOS and Windows and creates a draft GitHub release. Bump the version in `package.json`, `src-tauri/tauri.conf.json` and `src-tauri/Cargo.toml` first; the tag must match it.
+CI runs lint, typecheck, tests, the frontend build and `cargo check` on Ubuntu. Pushing a `v*` tag builds installers for Linux and macOS and creates a draft GitHub release. Windows installers are skipped until the CEF bundling issue above is fixed upstream. Bump the version in `package.json`, `src-tauri/tauri.conf.json` and `src-tauri/Cargo.toml` first; the tag must match it.
 
 ## License
 

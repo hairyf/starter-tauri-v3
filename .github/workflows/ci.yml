@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   test:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -19,10 +19,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            libwebkit2gtk-4.1-dev \
-            libgtk-3-dev \
+            libgtk-4-dev \
             libayatana-appindicator3-dev \
-            librsvg2-dev
+            librsvg2-dev \
+            libnss3-dev \
+            libgbm-dev \
+            libasound2-dev \
+            libxkbcommon-x11-dev \
+            libx11-xcb-dev
 
       - uses: pnpm/action-setup@v4
 
@@ -36,6 +40,11 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: src-tauri
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/tauri-cef
+          key: cef-3.0.0-alpha.6-${{ runner.os }}
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
