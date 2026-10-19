@@ -11,6 +11,7 @@ pub fn run() {
     let builder = tauri::Builder::default().runtime(tauri_runtime_wry::Wry::default());
 
     builder
+        .plugin(tauri_plugin_cef_webview::init())
         .invoke_handler(tauri::generate_handler![greet])
         .build(tauri::generate_context!())
         .expect("error while building tauri application")

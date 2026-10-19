@@ -1,4 +1,5 @@
 import { greet } from './greet'
+import 'tauri-cef-webview'
 import './style.css'
 
 const form = document.querySelector<HTMLFormElement>('#greet-form')

@@ -16,9 +16,10 @@ crate-type = ["staticlib", "cdylib", "rlib"]
 tauri-build = { version = "3.0.0-alpha.4", features = [] }
 
 [dependencies]
-tauri = { version = "3.0.0-alpha.5", features = [] }
+tauri = { version = "3.0.0-alpha.5", features = ["unstable"] }
 tauri-runtime-cef = { version = "3.0.0-alpha.6", optional = true }
 tauri-runtime-wry = { version = "3.0.0-alpha.5", optional = true }
+tauri-plugin-cef-webview = "0.2.0"
 
 [features]
 default = ["cef"]

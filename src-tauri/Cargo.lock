@@ -4314,6 +4314,7 @@ version = "0.1.0"
 dependencies = [
  "tauri",
  "tauri-build",
+ "tauri-plugin-cef-webview",
  "tauri-runtime-cef",
  "tauri-runtime-wry",
 ]
@@ -4660,6 +4661,35 @@ dependencies = [
  "syn 2.0.119",
  "tauri-codegen",
  "tauri-utils",
+]
+
+[[package]]
+name = "tauri-plugin"
+version = "3.0.0-alpha.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "41a865f60dc34ac9ea2d69f8c65e1344709809cc5c50ce34ed0842d0faefe51f"
+dependencies = [
+ "anyhow",
+ "glob",
+ "plist",
+ "schemars 1.2.3",
+ "serde",
+ "serde_json",
+ "tauri-utils",
+ "walkdir",
+]
+
+[[package]]
+name = "tauri-plugin-cef-webview"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2c2318a38e9a16a218496a271dfd2ddc11938a29bd43720a645cd520e30e1381"
+dependencies = [
+ "serde",
+ "serde_json",
+ "tauri",
+ "tauri-plugin",
+ "url",
 ]
 
 [[package]]

@@ -25,7 +25,8 @@
     "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
   },
   "dependencies": {
-    "@tauri-apps/api": "3.0.0-alpha.3"
+    "@tauri-apps/api": "3.0.0-alpha.3",
+    "tauri-cef-webview": "^0.2.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^9.5.1",
