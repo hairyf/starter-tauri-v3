@@ -17,7 +17,7 @@ tauri-build = { version = "3.0.0-alpha.4", features = [] }
 
 [dependencies]
 tauri = { version = "3.0.0-alpha.5", features = ["unstable", "tray-icon", "image-png", "protocol-asset"] }
-tauri-runtime-electron = { path = "../../tauri-runtime-electron" }
+tauri-runtime-electron = { git = "https://github.com/hairyf/tauri-runtime-electron", branch = "next" }
 
 [profile.release]
 codegen-units = 1

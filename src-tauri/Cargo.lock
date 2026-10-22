@@ -2688,6 +2688,7 @@ dependencies = [
 [[package]]
 name = "tauri-runtime-electron"
 version = "0.1.0"
+source = "git+https://github.com/hairyf/tauri-runtime-electron?branch=next#de75966e7bb9d9385c6eb25cb98aa00334931342"
 dependencies = [
  "base64 0.22.1",
  "cookie",
