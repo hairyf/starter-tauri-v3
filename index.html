@@ -6,22 +6,64 @@
     <title>starter-tauri-v3</title>
   </head>
   <body>
-    <main>
-      <h1>starter-tauri-v3</h1>
-      <p>Experimental starter for Tauri v3.</p>
-      <form id="greet-form">
-        <input id="name" value="Tauri" autocomplete="off" />
-        <button type="submit">Greet</button>
-      </form>
-      <output id="greet-result"></output>
-      <section id="embed-host">
-        <webview
-          id="embedded"
-          src="https://example.com/"
-          style="width: 100%; height: 100%;"
-        />
-      </section>
-    </main>
+    <!-- Frameless window: this bar is the window chrome. Native dragging and
+         double-click-to-maximize come from the `app-region: drag` style. -->
+    <header class="titlebar">
+      <div class="titlebar__drag" data-tauri-drag-region>
+        <span class="titlebar__dot"></span>
+        <span class="titlebar__title">starter-tauri-v3</span>
+      </div>
+      <div class="titlebar__actions">
+        <button id="window-minimize" type="button" title="Minimize" aria-label="Minimize">—</button>
+        <button id="window-maximize" type="button" title="Maximize" aria-label="Maximize">▢</button>
+        <button id="window-close" type="button" title="Close" aria-label="Close">✕</button>
+      </div>
+    </header>
+
+    <div class="shell">
+      <nav class="nav" aria-label="Sections">
+        <button class="nav__item is-active" type="button" data-section="greet">Greet</button>
+        <button class="nav__item" type="button" data-section="embed">Embedded page</button>
+        <button class="nav__item" type="button" data-section="tray">Tray &amp; window</button>
+      </nav>
+
+      <main class="content">
+        <section class="panel is-active" data-panel="greet">
+          <h1>starter-tauri-v3</h1>
+          <p>Experimental starter for Tauri v3 on an Electron runtime.</p>
+          <form id="greet-form">
+            <input id="name" value="Tauri" autocomplete="off" />
+            <button type="submit">Greet</button>
+          </form>
+          <output id="greet-result"></output>
+        </section>
+
+        <section class="panel" data-panel="embed">
+          <h1>Embedded page</h1>
+          <p>A guest page inside the app, composited by the page itself.</p>
+          <section id="embed-host">
+            <webview
+              id="embedded"
+              src="https://example.com/"
+              style="width: 100%; height: 100%;"
+            />
+          </section>
+        </section>
+
+        <section class="panel" data-panel="tray">
+          <h1>Tray &amp; window</h1>
+          <p>Close the window with the tray still running, then restore it from the tray icon.</p>
+          <dl class="facts">
+            <div><dt>Window</dt><dd id="fact-window">frameless</dd></div>
+            <div><dt>Tray</dt><dd>left click toggles, menu has Show / Hide / Quit</dd></div>
+            <div><dt>Runtime</dt><dd id="fact-runtime">…</dd></div>
+          </dl>
+          <button id="tray-hide" type="button">Hide window (tray keeps running)</button>
+          <button id="open-window" type="button">Open another window</button>
+        </section>
+      </main>
+    </div>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

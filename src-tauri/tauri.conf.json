@@ -13,12 +13,21 @@
     "windows": [
       {
         "title": "starter-tauri-v3",
-        "width": 800,
-        "height": 600
+        "width": 900,
+        "height": 640,
+        "minWidth": 720,
+        "minHeight": 480,
+        "decorations": false
       }
     ],
     "security": {
-      "csp": null
+      "csp": null,
+      "assetProtocol": {
+        "enable": true,
+        "scope": [
+          "$APPDATA/**"
+        ]
+      }
     }
   },
   "bundle": {
@@ -30,6 +39,9 @@
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
-    ]
+    ],
+    "resources": {
+      "target/electron": "runtime"
+    }
   }
 }

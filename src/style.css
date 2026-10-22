@@ -4,17 +4,133 @@
   font-family: ui-sans-serif, system-ui, sans-serif;
 }
 
+html,
 body {
-  display: grid;
-  min-height: 100vh;
+  height: 100%;
   margin: 0;
-  place-items: center;
 }
 
-main {
+body {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+button {
+  color: inherit;
+  font: inherit;
+  background: #1c1917;
+  border: 1px solid #292524;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #292524;
+}
+
+/* --- Frameless window chrome ------------------------------------------------ */
+.titlebar {
+  display: flex;
+  flex: none;
+  height: 2.25rem;
+  align-items: stretch;
+  background: #12100f;
+  border-bottom: 1px solid #292524;
+  user-select: none;
+}
+
+/* Chromium turns this into a native window drag region: drag moves the window,
+   double click maximizes it, right click opens the system menu. */
+.titlebar__drag {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline: 0.75rem;
+  app-region: drag;
+  -webkit-app-region: drag;
+}
+
+.titlebar__dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  background: #22c55e;
+  border-radius: 50%;
+}
+
+.titlebar__title {
+  color: #a8a29e;
+  font-size: 0.8rem;
+}
+
+.titlebar__actions {
+  display: flex;
+  align-items: stretch;
+}
+
+.titlebar__actions button {
+  width: 2.75rem;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: #d6d3d1;
+}
+
+.titlebar__actions button:hover {
+  background: #292524;
+}
+
+#window-close:hover {
+  background: #b91c1c;
+  color: #fff;
+}
+
+/* --- Shell ----------------------------------------------------------------- */
+.shell {
   display: grid;
-  width: min(24rem, calc(100vw - 4rem));
+  flex: 1;
+  min-height: 0;
+  grid-template-columns: 11rem 1fr;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem;
+  background: #12100f;
+  border-right: 1px solid #292524;
+}
+
+.nav__item {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-radius: 0.4rem;
+  color: #a8a29e;
+}
+
+.nav__item.is-active {
+  background: #1c1917;
+  color: #fafaf9;
+}
+
+.content {
+  min-height: 0;
+  padding: 1.5rem;
+  overflow: auto;
+}
+
+.panel {
+  display: none;
   gap: 1rem;
+  max-width: 40rem;
+}
+
+.panel.is-active {
+  display: grid;
 }
 
 h1 {
@@ -32,42 +148,65 @@ form {
   gap: 0.5rem;
 }
 
-input,
-button {
+input {
+  flex: 1;
   padding: 0.5rem 0.75rem;
   color: inherit;
   font: inherit;
   background: #1c1917;
   border: 1px solid #292524;
-  border-radius: 0.375rem;
+  border-radius: 0.5rem;
 }
 
-input {
-  flex: 1;
-  min-width: 0;
+form button {
+  padding: 0.5rem 0.75rem;
 }
 
-button {
-  cursor: pointer;
+#greet-result {
+  min-height: 1.25rem;
+  color: #22c55e;
 }
 
-button:hover {
-  border-color: #44403c;
-}
-
-output {
-  min-height: 1.5rem;
-  color: #1fa669;
-}
-
+/* A percentage height against an auto-height parent leaves the Electron guest
+   view short, so the box and the element both get an explicit height. */
 #embed-host {
-  height: 11.25rem;
-  border: 1px dashed #292524;
-  border-radius: 0.375rem;
+  height: 20rem;
+  border: 1px solid #292524;
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
 
 #embed-host webview {
-  display: block;
+  display: flex;
   width: 100%;
   height: 100%;
+}
+
+.facts {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.facts > div {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 1rem;
+  padding: 0.5rem 0.75rem;
+  background: #12100f;
+  border: 1px solid #292524;
+  border-radius: 0.5rem;
+}
+
+.facts dt {
+  color: #78716c;
+}
+
+.facts dd {
+  margin: 0;
+}
+
+#tray-hide {
+  justify-self: start;
+  padding: 0.5rem 0.75rem;
 }
